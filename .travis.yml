@@ -1,0 +1,20 @@
+---
+language: go
+sudo: false
+go:
+  - 1.9
+install:
+  - go get -u github.com/golang/dep/...
+  - dep ensure
+script:
+  - go test -coverprofile=.coverprofile .
+  - make bins
+deploy:
+  provider: releases
+  api_key:
+    secure: E4yLgL32Tex2pGBDMva2qemDFve1T8AgeBpNl5MPBXUyG/WnsS3qFJVjnvomSq6Eimhai931oADO6jJzKI5xgfDJYP0hWmeSZ08TsBMN/YoHvYGtihfSn9CTIjbMJREt9jQdLAeLLI9U4HSsA0tSFzQzT4JHtggYTruxRTqkV+GFswI5Wten1zqJ1ZheN4+ryqq6PKysMdWZ33C8sNSrPYafrUjGkGaz5KaG36cGEyeTul2qxJwmeRsmXlx50qVL5rUEfKKFDjFA6k1ilXjYutzY1Kpm2gwb4ooVfMiARFBvj3T4PLITsuew3JId3Iy+M8DBTWWMbJspxhQ1TrbuZn+T+QPbvqusJqiAiYvXr9UZrnFNu8paTbWVUx7lT9x/nPQHMy3lbcA+HckO1W8kvZZMTkzzOtjZOQA77AR5ulzFxn/sFxTVld+w+xx7Q3tCk/Qj2f+55Mno8crGJAfzK5cctCDNFOw1KqiZf8rXw4oW7p8HYfVxsQZbh1fZamEf/tiO1rOxg9CaHrldRQ12PBFxc/+Ny2qBN/bjSWsebjyCmcg9wU8GnQvSR9J79trJ1ANIMd36KuGgNAQcfdoomck6IDngUYoEbLSovplctC8YIbIHsHYby7igfA+WH4AIBl4El9A8cXqBjWmaCZ0tBkCUF2lZ7ivD3fOx+9tzFoM=
+  skip_cleanup: true
+  file_glob: true
+  file: bin/uuidgen_*
+  on:
+    repo: blockloop/uuidgen
